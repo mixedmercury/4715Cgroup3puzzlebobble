@@ -7,6 +7,7 @@ public class CannonScript : MonoBehaviour
 {
 
     public GameObject Loader;
+    public GameObject Ceiling;
     public SpriteRenderer nextColorLoader;
     public SpriteRenderer currentColorLoader;
 
@@ -33,6 +34,8 @@ public class CannonScript : MonoBehaviour
     Vector2 cannonDirection;
     private float angle;
 
+    private int shotCounter;
+
     void Start()
     {
         makeList();
@@ -55,45 +58,42 @@ public class CannonScript : MonoBehaviour
         angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && started == true)
         {        
-            if (started == true)
+            if (currentColor == 0)
             {
-                if (currentColor == 0)
-                {
-                    projectileObject = Instantiate(RedBubble, transform.position, Quaternion.identity);
-                }
-                else if (currentColor == 1)
-                {
-                    projectileObject = Instantiate(OrangeBubble, transform.position, Quaternion.identity);                    
-                }
-                else if (currentColor == 2)
-                {
-                    projectileObject = Instantiate(YellowBubble, transform.position, Quaternion.identity);              
-                }
-                else if (currentColor == 3)
-                {
-                    projectileObject = Instantiate(GreenBubble, transform.position, Quaternion.identity);               
-                }
-                else if (currentColor == 4)
-                {
-                    projectileObject = Instantiate(BlueBubble, transform.position, Quaternion.identity);                 
-                }
-                else if (currentColor == 5)
-                {
-                    projectileObject = Instantiate(PurpleBubble, transform.position, Quaternion.identity);                    
-                }
-                else if (currentColor == 6)
-                {
-                    projectileObject = Instantiate(WhiteBubble, transform.position, Quaternion.identity);                  
-                }
-                else if (currentColor == 7)
-                {
-                    projectileObject = Instantiate(BlackBubble, transform.position, Quaternion.identity);                   
-                }
-                activeChecker bubble = projectileObject.GetComponent<activeChecker>();
-                bubble.Launch(cannonDirection, 1000);
+                projectileObject = Instantiate(RedBubble, transform.position, Quaternion.identity);
             }
+            else if (currentColor == 1)
+            {
+                projectileObject = Instantiate(OrangeBubble, transform.position, Quaternion.identity);                    
+            }
+            else if (currentColor == 2)
+            {
+                projectileObject = Instantiate(YellowBubble, transform.position, Quaternion.identity);              
+            }
+            else if (currentColor == 3)
+            {
+                projectileObject = Instantiate(GreenBubble, transform.position, Quaternion.identity);               
+            }
+            else if (currentColor == 4)
+            {
+                projectileObject = Instantiate(BlueBubble, transform.position, Quaternion.identity);                 
+            }
+            else if (currentColor == 5)
+            {
+                projectileObject = Instantiate(PurpleBubble, transform.position, Quaternion.identity);                    
+            }
+            else if (currentColor == 6)
+            {
+                projectileObject = Instantiate(WhiteBubble, transform.position, Quaternion.identity);                  
+            }
+            else if (currentColor == 7)
+            {
+                projectileObject = Instantiate(BlackBubble, transform.position, Quaternion.identity);                   
+            }
+            activeChecker bubble = projectileObject.GetComponent<activeChecker>();
+            bubble.Launch(cannonDirection, 1000);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {

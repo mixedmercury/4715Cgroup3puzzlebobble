@@ -99,17 +99,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Loader: {fileID: 0}
+  Ceiling: {fileID: 0}
   nextColorLoader: {fileID: 0}
   currentColorLoader: {fileID: 0}
   spriteArray:
-  - {fileID: -608408813, guid: 63f4f4ec87cd4fe419be639ecaa9125c, type: 3}
-  - {fileID: -1789304848, guid: 63f4f4ec87cd4fe419be639ecaa9125c, type: 3}
-  - {fileID: -754347833, guid: 63f4f4ec87cd4fe419be639ecaa9125c, type: 3}
-  - {fileID: 1624088968, guid: 63f4f4ec87cd4fe419be639ecaa9125c, type: 3}
-  - {fileID: 1855098144, guid: 63f4f4ec87cd4fe419be639ecaa9125c, type: 3}
-  - {fileID: 2112498199, guid: 63f4f4ec87cd4fe419be639ecaa9125c, type: 3}
-  - {fileID: -1419972343, guid: 63f4f4ec87cd4fe419be639ecaa9125c, type: 3}
-  - {fileID: -343350771, guid: 63f4f4ec87cd4fe419be639ecaa9125c, type: 3}
+  - {fileID: 527696836, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
+  - {fileID: -33959722, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
+  - {fileID: 64313521, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
+  - {fileID: 496851004, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
+  - {fileID: -449447277, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
+  - {fileID: 492400598, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
+  - {fileID: -878738415, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
+  - {fileID: 954125951, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
   RedBubble: {fileID: 1158168729362813110, guid: aab75bad48d4e254b97ad24be5230e23, type: 3}
   OrangeBubble: {fileID: 3416195857923273314, guid: fde3146cd6e388a49919c97b02009aee, type: 3}
   YellowBubble: {fileID: 2320966956021268494, guid: 9392f2d225ea5c34ea8915450223bde2, type: 3}
