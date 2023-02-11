@@ -16,6 +16,7 @@ TagManager:
   - Next Color
   - Current Color
   - Roof
+  - Lose Line
   layers:
   - Default
   - TransparentFX

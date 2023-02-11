@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class activeChecker : MonoBehaviour
 {
-
     public CannonScript Cannon;
     Rigidbody2D rigidbody2d;
     public bool active;
@@ -12,17 +11,22 @@ public class activeChecker : MonoBehaviour
     private bool counted = false;
     private bool countedAgain = false;
     private int ceilingTurn = 0;
+    private float ceilingPosition;
+    public Sprite lossSprite;
+    private bool GameOver = false;
     
     void Awake()
     {
         lastFiredObject = gameObject;
         rigidbody2d = GetComponent<Rigidbody2D>();
+        GameObject ceilingItem = GameObject.FindWithTag("Roof");
+        ceilingScript Ceiling = ceilingItem.GetComponent<ceilingScript>();
+        ceilingPosition = 5 - ((Ceiling.ceilingMoves - 1) * .875f);
     }
 
     public void Launch(Vector2 direction, float force)
     {
         rigidbody2d.AddForce(direction * force);
-        Cannon.makeList();
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -32,9 +36,9 @@ public class activeChecker : MonoBehaviour
             rigidbody2d.constraints = RigidbodyConstraints2D.FreezeAll;
             if (other.gameObject.tag == "Roof")
             {
-                transform.position = new Vector3((Mathf.Round((transform.position.x)-.5f) + .5f), 5, 0);
+                transform.position = new Vector3((Mathf.Round((transform.position.x)-.5f) + .5f), ceilingPosition, 0);
             }
-            else
+            else if (other.gameObject.tag != "Lose Line")
             {
                 Vector3 col = other.transform.position;
                 Vector3 dir = transform.position - other.transform.position;
@@ -51,6 +55,17 @@ public class activeChecker : MonoBehaviour
                 else if (angle >= 60 && angle <120)
                 {
                     transform.position = col + new Vector3(-1, 0, 0);
+                    if (transform.position.x < -3.5)
+                    {
+                        if(angle <= 90)
+                        {
+                            transform.position = col + new Vector3(-.5f, -.875f, 0);
+                        }
+                        else if(angle > 90)
+                        {
+                            transform.position = col + new Vector3(-.5f, .875f, 0);
+                        }
+                    }
                 }
                 else if (angle >= 120 && angle <180)
                 {
@@ -71,6 +86,17 @@ public class activeChecker : MonoBehaviour
                 else if (angle >= 240 && angle <300)
                 {
                     transform.position = col + new Vector3(1, 0, 0);
+                    if (transform.position.x > 3.5)
+                    {
+                        if(angle <= 270)
+                        {
+                            transform.position = col + new Vector3(.5f, .875f, 0);
+                        }
+                        else if(angle > 270)
+                        {
+                            transform.position = col + new Vector3(.5f, -.875f, 0);
+                        }
+                    }
                 }
                 else if (angle >= 300 && angle <360)
                 {
@@ -83,7 +109,6 @@ public class activeChecker : MonoBehaviour
             }
             StartCoroutine(waitToCheck());
             active = false;
-            Cannon.changeNext();
         }
     }
 
@@ -120,7 +145,7 @@ public class activeChecker : MonoBehaviour
                 Destroy(lastFiredObject);
             }
         }
-        else if (counted == false) //checks if counted in chain yet
+        else if (counted == false && GameOver == false) //checks if counted in chain yet
         {
             surrounded = 0;
             chain = chain + 1; //adds to chain (number of colors in a row)
@@ -152,7 +177,7 @@ public class activeChecker : MonoBehaviour
             Collider2D[] ceilingChecker = Physics2D.OverlapCircleAll(transform.position, .6f);
             foreach (var ceilingBubble in ceilingChecker)
             {
-                if(ceilingBubble.tag != "Wall" && ceilingBubble.tag != "Roof")
+                if(ceilingBubble.tag != "Wall" && ceilingBubble.tag != "Roof" && ceilingBubble.tag != "Lose Line")
                 {
                     activeChecker ceilingChain = ceilingBubble.GetComponent<Collider2D>().GetComponent<activeChecker>();
                     ceilingChain.checkCeilingChain(turnCount);
@@ -168,5 +193,27 @@ public class activeChecker : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Lose Line" && active == false)
+        {
+            Cannon.disableShooting();
+            GameOver = true;
+            Debug.Log("Game Over!");
+            other.gameObject.SetActive(false);
+            var allBubbles = FindObjectsOfType<activeChecker>();
+            foreach(var activeBubbles in allBubbles)
+            {
+                var allSprite = activeBubbles.GetComponent<SpriteRenderer>();
+                allSprite.sprite = lossSprite;
+            }
+        }
+        else
+        {
+            return;
+        }
+
     }
 }

@@ -111,6 +111,7 @@ MonoBehaviour:
   - {fileID: 492400598, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
   - {fileID: -878738415, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
   - {fileID: 954125951, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
+  - {fileID: -2105302008, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
   RedBubble: {fileID: 1158168729362813110, guid: aab75bad48d4e254b97ad24be5230e23, type: 3}
   OrangeBubble: {fileID: 3416195857923273314, guid: fde3146cd6e388a49919c97b02009aee, type: 3}
   YellowBubble: {fileID: 2320966956021268494, guid: 9392f2d225ea5c34ea8915450223bde2, type: 3}
@@ -119,6 +120,7 @@ MonoBehaviour:
   PurpleBubble: {fileID: 8174624485799067707, guid: 023d3071386e18f4697e6dc2b1b47220, type: 3}
   WhiteBubble: {fileID: 4282691892448289025, guid: cbd107feb6219df44b49f3c10e852d05, type: 3}
   BlackBubble: {fileID: 8265259821844062012, guid: d6a67c484226c8246b1109452c2c777d, type: 3}
+  DeadBubble: {fileID: 3534138214557513054, guid: 70134ac33896889489b0cdf124c6ab92, type: 3}
 --- !u!61 &5374680981277565952
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -5,21 +5,17 @@ using UnityEngine;
 public class ceilingScript : MonoBehaviour
 {
     private static int turnCount = 0;
+    public int ceilingMoves = 1;
     new Renderer renderer;
     private Vector2 size;
+    public CannonScript Cannon;
 
     void Start()
     {
+        turnCount = 0;
+        ceilingMoves = 1;
         renderer = gameObject.GetComponent<Renderer>();
         size = renderer.bounds.size;
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            checkCeiling();
-        }
     }
 
     public void checkCeiling()
@@ -35,10 +31,21 @@ public class ceilingScript : MonoBehaviour
             }
         }
         var allBubbles = FindObjectsOfType<activeChecker>();
+        foreach(var activeBubbles in allBubbles)
+        {
+            activeChecker ceilingChain = activeBubbles.GetComponent<Collider2D>().GetComponent<activeChecker>();
+            ceilingChain.ceilingPopper(turnCount);
+        }
+        if(turnCount == (ceilingMoves * 8))
+        {
+            ceilingMoves = ceilingMoves + 1;
             foreach(var activeBubbles in allBubbles)
             {
-                activeChecker ceilingChain = activeBubbles.GetComponent<Collider2D>().GetComponent<activeChecker>();
-                ceilingChain.ceilingPopper(turnCount);
+                activeBubbles.transform.position = activeBubbles.transform.position + new Vector3(0, -.875f, 0);
             }
+            Debug.Log("Ceiling Moved!");
+            transform.position = transform.position + new Vector3(0, -.875f, 0);
+        }
+        Cannon.StartCoroutine(Cannon.waitForList());
     }
 }
