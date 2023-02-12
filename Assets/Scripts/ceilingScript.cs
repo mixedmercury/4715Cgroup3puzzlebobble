@@ -37,16 +37,34 @@ public class ceilingScript : MonoBehaviour
             activeChecker ceilingChain = activeBubbles.GetComponent<Collider2D>().GetComponent<activeChecker>();
             ceilingChain.ceilingPopper(turnCount);
         }
+        if(turnCount == (ceilingMoves * 8) - 2) //Warning Animation 1
+        {
+            Debug.Log("Warning animation 1"); 
+            foreach(var activeBubbles in allBubbles)
+            {
+                //Trigger Warning Animation 1 on every bubble
+            }
+        }
+        if(turnCount == (ceilingMoves * 8) - 1) //Warning Animation 2
+        {
+            Debug.Log("Warning animation 2");
+            foreach(var activeBubbles in allBubbles)
+            {
+                //Trigger Warning Animation 2 on every bubble
+            }
+        }
         if(turnCount == (ceilingMoves * 8))
         {
             ceilingMoves = ceilingMoves + 1;
             foreach(var activeBubbles in allBubbles)
             {
                 activeBubbles.transform.position = activeBubbles.transform.position + new Vector3(0, -.875f, 0);
+                //Stop animation on every bubble
             }
             Debug.Log("Ceiling Moved!");
             transform.position = transform.position + new Vector3(0, -.875f, 0);
             WallOfDoom.transform.position = WallOfDoom.transform.position + new Vector3(0, -.875f, 0);
+
         }
         Cannon.StartCoroutine(Cannon.waitForList());
     }

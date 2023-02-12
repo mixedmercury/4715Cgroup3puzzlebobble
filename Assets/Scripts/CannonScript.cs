@@ -34,6 +34,7 @@ public class CannonScript : MonoBehaviour
     private int shotCounter;
     private static bool shootingEnabled = false;
     private bool lost = false;
+    private bool warningAnimationOn = false;
 
     void Start()
     {
@@ -61,10 +62,20 @@ public class CannonScript : MonoBehaviour
             cannonDirection.Normalize();
         }
 
+        if (timer > 7 && warningAnimationOn == false)
+        {
+            warningAnimationOn = true;
+            Debug.Log("Timer warning animation started!");
+            //insert code to play warning animation
+        }
+
         if ((Input.GetMouseButtonDown(0) || timer >= 10) && shootingEnabled == true)
         {
             shootingEnabled = false;
             timer = 0;
+            //insert code to set animation to default for if warning animation was triggered
+            warningAnimationOn = false;
+            Debug.Log("Timer warning animation stopped.");
             if (currentColor == 0)
             {
                 projectileObject = Instantiate(RedBubble, transform.position, Quaternion.identity);
