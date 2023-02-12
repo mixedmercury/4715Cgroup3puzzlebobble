@@ -30,6 +30,7 @@ public class CannonScript : MonoBehaviour
     Vector2 cannonDirection;
     private float angle;
     private float timer = 0.0f;
+    public float lossTimer; //Make lossTimer = [Time to lose]
 
     private int shotCounter;
     private static bool shootingEnabled = false;
@@ -47,6 +48,7 @@ public class CannonScript : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+        lossTimer -= Time.deltaTime;
 
         Vector3 mousePos = Input.mousePosition;
 
@@ -115,6 +117,11 @@ public class CannonScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        if (lossTimer <= 0 && shootingEnabled == true)
+        {
+            Debug.Log("Game lost"); //Insert loss condition
+            shootingEnabled = false;
         }
     }
 
