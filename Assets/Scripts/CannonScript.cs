@@ -33,6 +33,7 @@ public class CannonScript : MonoBehaviour
 
     private int shotCounter;
     private static bool shootingEnabled = false;
+    private bool lost = false;
 
     void Start()
     {
@@ -114,7 +115,10 @@ public class CannonScript : MonoBehaviour
         nextColor = colorList[Random.Range(0, colorList.Count)];
         nextColorLoader = GameObject.FindWithTag("Next Color").GetComponent<SpriteRenderer>();
         nextColorLoader.sprite = spriteArray[nextColor];
+        if  (lost == false)
+        {
         shootingEnabled = true;
+        }
     }
 
     public IEnumerator waitForList()
@@ -171,5 +175,6 @@ public class CannonScript : MonoBehaviour
     public void disableShooting()
     {
         shootingEnabled = false;
+        lost = true;
     }
 }

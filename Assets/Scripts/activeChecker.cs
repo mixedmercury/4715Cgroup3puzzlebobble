@@ -108,7 +108,6 @@ public class activeChecker : MonoBehaviour
                 }
             }
             StartCoroutine(waitToCheck());
-            active = false;
         }
     }
 
@@ -165,6 +164,7 @@ public class activeChecker : MonoBehaviour
                     }
                 }
             }
+            active = false;
             counted = false;
         }
     }

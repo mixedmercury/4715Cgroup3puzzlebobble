@@ -9,6 +9,7 @@ public class ceilingScript : MonoBehaviour
     new Renderer renderer;
     private Vector2 size;
     public CannonScript Cannon;
+    public GameObject WallOfDoom;
 
     void Start()
     {
@@ -45,6 +46,7 @@ public class ceilingScript : MonoBehaviour
             }
             Debug.Log("Ceiling Moved!");
             transform.position = transform.position + new Vector3(0, -.875f, 0);
+            WallOfDoom.transform.position = WallOfDoom.transform.position + new Vector3(0, -.875f, 0);
         }
         Cannon.StartCoroutine(Cannon.waitForList());
     }

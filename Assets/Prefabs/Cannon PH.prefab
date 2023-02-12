@@ -98,10 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2e164c9cf2d744bb043499b9c6bbc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Loader: {fileID: 0}
-  Ceiling: {fileID: 0}
-  nextColorLoader: {fileID: 0}
-  currentColorLoader: {fileID: 0}
   spriteArray:
   - {fileID: 527696836, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
   - {fileID: -33959722, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
@@ -120,7 +116,7 @@ MonoBehaviour:
   PurpleBubble: {fileID: 8174624485799067707, guid: 023d3071386e18f4697e6dc2b1b47220, type: 3}
   WhiteBubble: {fileID: 4282691892448289025, guid: cbd107feb6219df44b49f3c10e852d05, type: 3}
   BlackBubble: {fileID: 8265259821844062012, guid: d6a67c484226c8246b1109452c2c777d, type: 3}
-  DeadBubble: {fileID: 3534138214557513054, guid: 70134ac33896889489b0cdf124c6ab92, type: 3}
+  DeadBubble: {fileID: 2855114824576739403, guid: fe73622be972e0346b958b49da666631, type: 3}
 --- !u!61 &5374680981277565952
 BoxCollider2D:
   m_ObjectHideFlags: 0
