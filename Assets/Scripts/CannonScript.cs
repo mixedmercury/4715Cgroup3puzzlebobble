@@ -113,6 +113,7 @@ public class CannonScript : MonoBehaviour
             activeChecker bubble = projectileObject.GetComponent<activeChecker>();
             currentColorLoader.sprite = null;
             bubble.Launch(cannonDirection, 1250);
+            currentColor = nextColor;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -122,12 +123,12 @@ public class CannonScript : MonoBehaviour
         {
             Debug.Log("Game lost"); //Insert loss condition
             shootingEnabled = false;
+            lost = true;
         }
     }
 
     public void changeNext()
     {
-        currentColor = nextColor;
         currentColorLoader = GameObject.FindWithTag("Current Color").GetComponent<SpriteRenderer>();
         currentColorLoader.sprite = spriteArray[currentColor];
         nextColor = colorList[Random.Range(0, colorList.Count)];

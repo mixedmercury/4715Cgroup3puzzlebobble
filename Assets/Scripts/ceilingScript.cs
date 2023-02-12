@@ -64,7 +64,6 @@ public class ceilingScript : MonoBehaviour
             Debug.Log("Ceiling Moved!");
             transform.position = transform.position + new Vector3(0, -.875f, 0);
             WallOfDoom.transform.position = WallOfDoom.transform.position + new Vector3(0, -.875f, 0);
-
         }
         Cannon.StartCoroutine(Cannon.waitForList());
     }
