@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1053072368555788460, guid: d757572396beef740b35bbc3c93d4ce1, type: 3}
+      propertyPath: popEffect
+      value: 
+      objectReference: {fileID: 3372454296569077348, guid: ce08dcd87a60393499aaeca553e0db00, type: 3}
+    - target: {fileID: -1053072368555788460, guid: d757572396beef740b35bbc3c93d4ce1, type: 3}
+      propertyPath: lossSprite
+      value: 
+      objectReference: {fileID: -159746504, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
     - target: {fileID: 5718262443703260463, guid: d757572396beef740b35bbc3c93d4ce1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,16 +61,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6305876621431725966, guid: d757572396beef740b35bbc3c93d4ce1, type: 3}
       propertyPath: m_Size.x
-      value: 0.9302326
+      value: 1.62
       objectReference: {fileID: 0}
     - target: {fileID: 6305876621431725966, guid: d757572396beef740b35bbc3c93d4ce1, type: 3}
       propertyPath: m_Size.y
-      value: 0.9302326
+      value: 1.62
       objectReference: {fileID: 0}
     - target: {fileID: 6305876621431725966, guid: d757572396beef740b35bbc3c93d4ce1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 527696836, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
+      objectReference: {fileID: -445708910, guid: 61cfa6222eaac8d4cb78acf55d676f49, type: 3}
     - target: {fileID: 6305876621431725966, guid: d757572396beef740b35bbc3c93d4ce1, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -73,6 +81,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6305876621431725966, guid: d757572396beef740b35bbc3c93d4ce1, type: 3}
       propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305876621431725966, guid: d757572396beef740b35bbc3c93d4ce1, type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6515178878403623062, guid: d757572396beef740b35bbc3c93d4ce1, type: 3}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class CannonScript : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class CannonScript : MonoBehaviour
 
     private static int nextColor;
     private static int currentColor;
+    public static int level = 1;
 
     public GameObject RedBubble;
     public GameObject OrangeBubble;
@@ -24,18 +26,26 @@ public class CannonScript : MonoBehaviour
     public GameObject WhiteBubble;
     public GameObject BlackBubble;
     public GameObject DeadBubble;
+    public ParticleSystem cannonFire;
+    public AudioClip popSound;
+    AudioSource audioSource;
 
     private GameObject projectileObject;
+
+    public TextMeshProUGUI timerText;
     
     Vector2 cannonDirection;
     private float angle;
     private float timer = 0.0f;
-    public float lossTimer; //Make lossTimer = [Time to lose]
 
     private int shotCounter;
     private static bool shootingEnabled = false;
     private bool lost = false;
-    private bool warningAnimationOn = false;
+    private bool shootAnimationOn = false;
+    public GameObject shootaniObject;
+    public float lossTimer;
+    private int timeInt;
+    public int checkerCount;
 
     void Start()
     {
@@ -43,12 +53,21 @@ public class CannonScript : MonoBehaviour
         nextColor = colorList[Random.Range(0, colorList.Count)];
         changeNext();
         shootingEnabled = true;
+        shootaniObject.SetActive(false);
+        checkerCount = 0;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
         timer += Time.deltaTime;
-        lossTimer -= Time.deltaTime;
+        if (lossTimer > 0)
+        {
+            lossTimer -= Time.deltaTime;
+        }
+
+        timeInt = (int)lossTimer;
+        timerText.text = timeInt.ToString();
 
         Vector3 mousePos = Input.mousePosition;
 
@@ -64,67 +83,72 @@ public class CannonScript : MonoBehaviour
             cannonDirection.Normalize();
         }
 
-        if (timer > 7 && warningAnimationOn == false)
+        if(timer > 7 && shootAnimationOn == false)
         {
-            warningAnimationOn = true;
-            Debug.Log("Timer warning animation started!");
-            //insert code to play warning animation
+            shootAnimationOn = true;
+            shootaniObject.SetActive(true);
         }
 
         if ((Input.GetMouseButtonDown(0) || timer >= 10) && shootingEnabled == true)
         {
             shootingEnabled = false;
             timer = 0;
-            //insert code to set animation to default for if warning animation was triggered
-            warningAnimationOn = false;
-            Debug.Log("Timer warning animation stopped.");
             if (currentColor == 0)
             {
                 projectileObject = Instantiate(RedBubble, transform.position, Quaternion.identity);
             }
             else if (currentColor == 1)
             {
-                projectileObject = Instantiate(OrangeBubble, transform.position, Quaternion.identity);                    
+                projectileObject = Instantiate(OrangeBubble, transform.position, Quaternion.identity);                
             }
             else if (currentColor == 2)
             {
-                projectileObject = Instantiate(YellowBubble, transform.position, Quaternion.identity);              
+                projectileObject = Instantiate(YellowBubble, transform.position, Quaternion.identity);           
             }
             else if (currentColor == 3)
             {
-                projectileObject = Instantiate(GreenBubble, transform.position, Quaternion.identity);               
+                projectileObject = Instantiate(GreenBubble, transform.position, Quaternion.identity);     
             }
             else if (currentColor == 4)
             {
-                projectileObject = Instantiate(BlueBubble, transform.position, Quaternion.identity);                 
+                projectileObject = Instantiate(BlueBubble, transform.position, Quaternion.identity);            
             }
             else if (currentColor == 5)
             {
-                projectileObject = Instantiate(PurpleBubble, transform.position, Quaternion.identity);                    
+                projectileObject = Instantiate(PurpleBubble, transform.position, Quaternion.identity);     
             }
             else if (currentColor == 6)
             {
-                projectileObject = Instantiate(WhiteBubble, transform.position, Quaternion.identity);                  
+                projectileObject = Instantiate(WhiteBubble, transform.position, Quaternion.identity);         
             }
             else if (currentColor == 7)
             {
-                projectileObject = Instantiate(BlackBubble, transform.position, Quaternion.identity);                   
+                projectileObject = Instantiate(BlackBubble, transform.position, Quaternion.identity);      
             }
             activeChecker bubble = projectileObject.GetComponent<activeChecker>();
             currentColorLoader.sprite = null;
+            cannonFire.Play();
+            audioSource.PlayOneShot(popSound);
             bubble.Launch(cannonDirection, 1250);
             currentColor = nextColor;
+            shootaniObject.SetActive(false);
+            shootAnimationOn = false;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        if (lossTimer <= 0 && shootingEnabled == true)
+        if(lossTimer <= 0 && shootingEnabled == true)
         {
-            Debug.Log("Game lost"); //Insert loss condition
+            Debug.Log("Game lost");
             shootingEnabled = false;
             lost = true;
+            Invoke(nameof(teleport), 2f);
         }
+    }
+    void teleport()
+    {
+        SceneManager.LoadScene("LoseScreen");
     }
 
     public void changeNext()
@@ -195,5 +219,6 @@ public class CannonScript : MonoBehaviour
     {
         shootingEnabled = false;
         lost = true;
+        Invoke(nameof(teleport), 2f);
     }
 }

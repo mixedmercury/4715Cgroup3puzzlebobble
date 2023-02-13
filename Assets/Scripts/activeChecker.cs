@@ -187,10 +187,17 @@ public class activeChecker : MonoBehaviour
         }
     }
 
-    public void ceilingPopper(int turnCount)
+    public IEnumerator ceilingPopper(int turnCount)
     {
         if(ceilingTurn < turnCount)
         {
+            GetComponent<Collider2D>().enabled = false;
+            rigidbody2d.constraints = RigidbodyConstraints2D.None;
+            rigidbody2d.gravityScale = 100;
+            GameObject ceilingItem = GameObject.FindWithTag("Roof");
+            ceilingScript Ceiling = ceilingItem.GetComponent<ceilingScript>();
+            Ceiling.removeFromCount();
+            yield return new WaitForSeconds(1);
             Destroy(gameObject);
         }
     }
